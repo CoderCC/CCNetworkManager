@@ -7,7 +7,7 @@
 ### 1.1 无缓存
 
 ```
-[PPNetworkHelper GET:url parameters:nil success:^(id responseObject) {
+[CCNetworkManager GET:url parameters:nil success:^(id responseObject) {
         //请求成功
     } failure:^(NSError *error) {
         //请求失败
@@ -15,17 +15,17 @@
 ```
 ### 1.2 无缓存,手动缓存
 ```
-[PPNetworkHelper GET:url parameters:nil success:^(id responseObject) {
+[CCNetworkManager GET:url parameters:nil success:^(id responseObject) {
     //请求成功
         //手动缓存
-    [PPNetworkCache setHttpCache:responseObject URL:url parameters:parameters];
+    [CCNetworkCache setHttpCache:responseObject URL:url parameters:parameters];
     } failure:^(NSError *error) {
     //请求失败
 }];
 ```
 ## 2. 自动缓存(GET与POST请求用法相同)
 ```
-[PPNetworkHelper GET:url parameters:nil responseCache:^(id responseCache) {
+[CCNetworkManager GET:url parameters:nil responseCache:^(id responseCache) {
         //加载缓存数据
     } success:^(id responseObject) {
         //请求成功
@@ -35,7 +35,7 @@
 ```
 ## 3.单/多图片上传
 ```
-[PPNetworkHelper uploadImagesWithURL:url
+[CCNetworkManager uploadImagesWithURL:url
                     	parameters:@{@"参数":@"参数"}
                         	images:@[@"UIImage数组"]
                           name:@"文件对应服务器上的字段"
@@ -53,7 +53,7 @@
 ```
 ## 4.文件上传
 ```
-[PPNetworkHelper uploadFileWithURL:url
+[CCNetworkManager uploadFileWithURL:url
                     parameters:@{@"参数":@"参数"}
                           name:@"文件对应服务器上的字段"
                       filePath:@"文件本地的沙盒路径"
@@ -68,7 +68,7 @@
 ```
 ## 5.文件下载
 ```
-NSURLSessionTask *task = [PPNetworkHelper downloadWithURL:url fileDir:@"下载至沙盒中的制定文件夹(默认为Download)" progress:^(NSProgress *progress) {
+NSURLSessionTask *task = [CCNetworkManager downloadWithURL:url fileDir:@"下载至沙盒中的制定文件夹(默认为Download)" progress:^(NSProgress *progress) {
         //下载进度,如果要配合UI进度条显示,必须在主线程更新UI
         NSLog(@"下载进度:%.2f%%",100.0 * progress.completedUnitCount/progress.totalUnitCount);
     } success:^(NSString *filePath) {
@@ -85,15 +85,15 @@ NSURLSessionTask *task = [PPNetworkHelper downloadWithURL:url fileDir:@"下载�
 ## 6.网络状态监测
 ```
 // 1.实时获取网络状态,通过Block回调实时获取(此方法可多次调用)
-[PPNetworkHelper networkStatusWithBlock:^(PPNetworkStatus status) {
+[CCNetworkManager networkStatusWithBlock:^(CCNetworkStatus status) {
    switch (status) {
-       case PPNetworkStatusUnknown:          //未知网络
+       case CCNetworkStatusUnknown:          //未知网络
            break;
-       case PPNetworkStatusNotReachable:    //无网络
+       case CCNetworkStatusNotReachable:    //无网络
            break;
-       case PPNetworkStatusReachableViaWWAN://手机网络
+       case CCNetworkStatusReachableViaWWAN://手机网络
            break;
-       case PPNetworkStatusReachableViaWiFi://WIFI
+       case CCNetworkStatusReachableViaWiFi://WIFI
            break;
    }
 }];
@@ -118,9 +118,9 @@ if (kIsNetwork) {
 
 ### 7.2 获取缓存总大小
 ```
-NSInteger totalBytes = [PPNetworkCache getAllHttpCacheSize];
+NSInteger totalBytes = [CCNetworkCache getAllHttpCacheSize];
 NSLog(@"网络缓存大小cache = %.2fMB",totalBytes/1024/1024.f);
 ```
 ### 7.3 删除所有缓存
 
-`[PPNetworkCache removeAllHttpCache]`
+`[CCNetworkCache removeAllHttpCache]`
