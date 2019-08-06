@@ -2,8 +2,8 @@
 //  ViewController.h
 //  CCNetworkManager
 //
-//  Created by 魏朋 on 2019/8/5.
-//  Copyright © 2019 魏朋. All rights reserved.
+//  Created by WeiPeng on 16/8/12.
+//  Copyright © 2016 WeiPeng. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

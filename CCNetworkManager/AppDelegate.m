@@ -2,11 +2,12 @@
 //  AppDelegate.m
 //  CCNetworkManager
 //
-//  Created by 魏朋 on 2019/8/5.
-//  Copyright © 2019 魏朋. All rights reserved.
+//  Created by WeiPeng on 16/8/12.
+//  Copyright © 2016 WeiPeng. All rights reserved.
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +18,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    UIWindow *keyWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window = keyWindow;
+    keyWindow.rootViewController = [[ViewController alloc] init];
+    [keyWindow makeKeyAndVisible];
+    
+    
     return YES;
 }
 
